@@ -39,7 +39,7 @@ public class AllTreatmentController {
     @FXML
     private Button btnNewTreatment;
     @FXML
-    private Button btnDelete;
+    private Button btnLock;
 
     private ObservableList<Treatment> tableviewContent =
             FXCollections.observableArrayList();
@@ -133,12 +133,12 @@ public class AllTreatmentController {
     }
 
     @FXML
-    public void handleDelete(){
+    public void handleLock(){
         int index = this.tableView.getSelectionModel().getSelectedIndex();
         Treatment t = this.tableviewContent.remove(index);
         TreatmentDAO dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         try {
-            dao.deleteById(t.getTid());
+            dao.updateLockStatus(t.getTid());
         } catch (SQLException e) {
             e.printStackTrace();
         }

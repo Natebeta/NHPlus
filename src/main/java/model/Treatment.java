@@ -12,6 +12,15 @@ public class Treatment {
     private LocalTime end;
     private String description;
     private String remarks;
+    private Boolean lockStatus;
+
+    public Boolean getLockStatus() {
+        return lockStatus;
+    }
+
+    public void setLockStatus(boolean lockStatus) {
+        this.lockStatus = lockStatus;
+    }
 
     public Treatment(long pid, LocalDate date, LocalTime begin,
                      LocalTime end, String description, String remarks) {
