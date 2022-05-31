@@ -2,6 +2,7 @@ package datastorage;
 
 import model.Treatment;
 import utils.DateConverter;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,15 +20,15 @@ public class TreatmentDAO extends DAOimp<Treatment> {
 
     @Override
     protected String getCreateStatementString(Treatment treatment) {
-        return String.format("INSERT INTO treatment (pid, treatment_date, begin, end, description, remarks) VALUES " +
-                "(%d, '%s', '%s', '%s', '%s', '%s')", treatment.getPid(), treatment.getDate(),
+        return String.format("INSERT INTO treatment (pid, treatment_date, begin, end, description, remarks, lock_status) VALUES " +
+                        "(%d, '%s', '%s', '%s', '%s', '%s', '%s')", treatment.getPid(), treatment.getDate(),
                 treatment.getBegin(), treatment.getEnd(), treatment.getDescription(),
-                treatment.getRemarks());
+                treatment.getRemarks(), treatment.getLockStatus());
     }
 
     @Override
     protected String getReadByIDStatementString(long key) {
-        return String.format("SELECT * FROM treatment WHERE tid = %d", key);
+        return String.format("SELECT * FROM treatment WHERE tid = %d AND lock_status = false", key);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class TreatmentDAO extends DAOimp<Treatment> {
 
     @Override
     protected String getReadAllStatementString() {
-        return "SELECT * FROM treatment";
+        return "SELECT * FROM treatment WHERE lock_status = false";
     }
 
     @Override
@@ -63,7 +64,7 @@ public class TreatmentDAO extends DAOimp<Treatment> {
     @Override
     protected String getUpdateStatementString(Treatment treatment) {
         return String.format("UPDATE treatment SET pid = %d, treatment_date ='%s', begin = '%s', end = '%s'," +
-                "description = '%s', remarks = '%s' WHERE tid = %d", treatment.getPid(), treatment.getDate(),
+                        "description = '%s', remarks = '%s' WHERE tid = %d", treatment.getPid(), treatment.getDate(),
                 treatment.getBegin(), treatment.getEnd(), treatment.getDescription(), treatment.getRemarks(),
                 treatment.getTid());
     }
@@ -82,12 +83,17 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         return list;
     }
 
-    private String getReadAllTreatmentsOfOnePatientByPid(long pid){
+    private String getReadAllTreatmentsOfOnePatientByPid(long pid) {
         return String.format("SELECT * FROM treatment WHERE pid = %d", pid);
     }
 
     public void deleteByPid(long key) throws SQLException {
         Statement st = conn.createStatement();
         st.executeUpdate(String.format("Delete FROM treatment WHERE pid= %d", key));
+    }
+
+    public void updateLockStatus(long key) throws SQLException {
+        Statement st = conn.createStatement();
+        st.executeUpdate(String.format("UPDATE treatment SET lock_status = true WHERE tid = %d", key));
     }
 }
