@@ -84,7 +84,7 @@ public class TreatmentDAO extends DAOimp<Treatment> {
     }
 
     private String getReadAllTreatmentsOfOnePatientByPid(long pid) {
-        return String.format("SELECT * FROM treatment WHERE pid = %d", pid);
+        return String.format("SELECT * FROM treatment WHERE pid = %d AND lock_status = false", pid);
     }
 
     public void deleteByPid(long key) throws SQLException {
