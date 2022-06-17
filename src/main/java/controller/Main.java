@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private Stage primaryStage;
+    private static Stage stage;
 
     @Override
     public void start(Stage primaryStage) {
@@ -24,7 +25,8 @@ public class Main extends Application {
 
     public void mainWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/MainWindowView.fxml"));
+            stage = primaryStage;
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/LoginView.fxml"));
             BorderPane pane = loader.load();
 
             Scene scene = new Scene(pane);
@@ -45,6 +47,12 @@ public class Main extends Application {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void changeView(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
+        BorderPane borderPane = fxmlLoader.load();
+        stage.getScene().setRoot(borderPane);
     }
 
     public static void main(String[] args) {
