@@ -49,4 +49,15 @@ public class MainWindowController {
         Main m = new Main();
         m.changeView("/LoginView.fxml");
     }
+
+    @FXML
+    private void handleShowAllCaregiver(ActionEvent e) {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AllCaregiverView.fxml"));
+        try {
+            mainBorderPane.setCenter(loader.load());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        AllCaregiverController controller = loader.getController();
+    }
 }
