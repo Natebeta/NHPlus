@@ -61,6 +61,10 @@ public class TreatmentController {
         this.taRemarks.setText(this.treatment.getRemarks());
     }
 
+    /**
+     *
+     * updates a treatment by calling the update-Method in the {@link TreatmentDAO}
+     */
     @FXML
     public void handleChange(){
         this.treatment.setDate(this.datepicker.getValue().toString());
@@ -73,6 +77,10 @@ public class TreatmentController {
         stage.close();
     }
 
+    /**
+     *
+     * updates a treatment by calling the update-Method in the {@link TreatmentDAO}
+     */
     private void doUpdate(){
         TreatmentDAO dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         try {

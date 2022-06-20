@@ -1,5 +1,6 @@
 package controller;
 
+import datastorage.CaregiverDAO;
 import datastorage.DAOFactory;
 import datastorage.TreatmentDAO;
 import javafx.fxml.FXML;
@@ -47,6 +48,9 @@ public class NewTreatmentController {
         this.lblSurname.setText(patient.getSurname());
     }
 
+    /**
+     * handles a add-click-event. Creates a treatment and calls the create method in the {@link TreatmentDAO}
+     */
     @FXML
     public void handleAdd(){
         LocalDate date = this.datepicker.getValue();
@@ -62,6 +66,10 @@ public class NewTreatmentController {
         stage.close();
     }
 
+    /**
+     * creates Treatment
+     * @param treatment calls the create method {@link TreatmentDAO}
+     */
     private void createTreatment(Treatment treatment) {
         TreatmentDAO dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         try {
@@ -71,6 +79,9 @@ public class NewTreatmentController {
         }
     }
 
+    /**
+     * handles a cancel-click-event. Closes the Combobox
+     */
     @FXML
     public void handleCancel(){
         stage.close();

@@ -17,6 +17,9 @@ import model.Caregiver;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * The <code>AllCaregiverController</code> contains the entire logic of the caregiver view. It determines which data is displayed and how to react to events.
+ */
 public class AllCaregiverController {
     @FXML
     private TableView<Caregiver> tableView;
@@ -127,6 +130,9 @@ public class AllCaregiverController {
         }
     }
 
+    /**
+     * handles a lock-click-event. Locks a caregiver and calls the update lock status method in the {@link CaregiverDAO}
+     */
     @FXML
     public void handleLock(){
         int index = this.tableView.getSelectionModel().getSelectedIndex();
