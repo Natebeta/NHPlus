@@ -2,11 +2,7 @@ package datastorage;
 
 import model.Treatment;
 import utils.DateConverter;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -156,5 +152,10 @@ public class TreatmentDAO extends DAOimp<Treatment> {
     public void updateLockStatus(long key) throws SQLException {
         Statement st = conn.createStatement();
         st.executeUpdate(String.format("UPDATE treatment SET lock_status = true WHERE tid = %d", key));
+    }
+
+    public int deleteOlderThanDate(LocalDate date) throws SQLException {
+        Statement st = conn.createStatement();
+        return st.executeUpdate(String.format("Delete FROM treatment WHERE treatment_date>'%s'", Date.valueOf(date)));
     }
 }

@@ -1,6 +1,6 @@
 package controller;
 
-import datastorage.CaregiverDAO;
+import datastorage.DAOFactory;
 import datastorage.PatientDAO;
 import datastorage.TreatmentDAO;
 import javafx.collections.FXCollections;
@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Patient;
 import model.Treatment;
-import datastorage.DAOFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

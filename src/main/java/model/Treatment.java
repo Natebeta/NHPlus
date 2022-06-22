@@ -23,17 +23,18 @@ public class Treatment {
     }
 
     public Treatment(long pid, LocalDate date, LocalTime begin,
-                     LocalTime end, String description, String remarks) {
+                     LocalTime end, String description, String remarks, boolean lockStatus) {
         this.pid = pid;
         this.date = date;
         this.begin = begin;
         this.end = end;
         this.description = description;
         this.remarks = remarks;
+        this.lockStatus = lockStatus;
     }
 
     public Treatment(long tid, long pid, LocalDate date, LocalTime begin,
-                     LocalTime end, String description, String remarks) {
+                     LocalTime end, String description, String remarks, boolean lockStatus) {
         this.tid = tid;
         this.pid = pid;
         this.date = date;
@@ -41,6 +42,7 @@ public class Treatment {
         this.end = end;
         this.description = description;
         this.remarks = remarks;
+        this.lockStatus = lockStatus;
     }
 
     public long getTid() {
