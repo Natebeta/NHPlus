@@ -11,7 +11,6 @@ import java.time.LocalTime;
  * The treatments for the patients
  */
 public class Treatment {
-    private String caregiver;
     private long tid;
     private long pid;
     private LocalDate date;
@@ -33,7 +32,7 @@ public class Treatment {
      * @param cid
      */
     public Treatment(long pid, LocalDate date, LocalTime begin,
-                     LocalTime end, String description, String remarks, long cid, String caregiver) {
+                     LocalTime end, String description, String remarks, long cid) {
         this.pid = pid;
         this.date = date;
         this.begin = begin;
@@ -42,7 +41,6 @@ public class Treatment {
         this.remarks = remarks;
         this.lockStatus = false;
         this.cid = cid;
-        this.caregiver = caregiver;
     }
 
     /**
@@ -67,17 +65,6 @@ public class Treatment {
         this.remarks = remarks;
         this.lockStatus = false;
         this.cid = cid;
-    }
-
-    public Treatment(long pid, LocalDate date, LocalTime begin, LocalTime end, String description, String remarks, String caregiver) {
-        this.tid = tid;
-        this.pid = pid;
-        this.date = date;
-        this.begin = begin;
-        this.end = end;
-        this.description = description;
-        this.remarks = remarks;
-        this.lockStatus = false;
     }
 
     /**
@@ -191,8 +178,7 @@ public class Treatment {
                 "\nBegin: " + this.begin +
                 "\nEnd: " + this.end +
                 "\nDescription: " + this.description +
-                "\nRemarks: " + this.remarks +
-                "\nCID: " + this.cid + "\n";
+                "\nRemarks: " + this.remarks + "\n";
     }
 
     public Boolean getLockStatus() {

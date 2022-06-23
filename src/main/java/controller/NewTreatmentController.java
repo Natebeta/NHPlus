@@ -63,14 +63,13 @@ public class NewTreatmentController {
     @FXML
     public void handleAdd(){
         LocalDate date = this.datepicker.getValue();
-        String s_begin = txtBegin.getText();
         LocalTime begin = DateConverter.convertStringToLocalTime(txtBegin.getText());
         LocalTime end = DateConverter.convertStringToLocalTime(txtEnd.getText());
         String description = txtDescription.getText();
         String remarks = taRemarks.getText();
         String caregiver = this.comboBoxCaregiver.getSelectionModel().getSelectedItem();
         Treatment treatment = new Treatment(patient.getPid(), date,
-                begin, end, description, remarks, caregiver);
+                begin, end, description, remarks, Long.parseLong(caregiver));
         createTreatment(treatment);
         controller.readAllAndShowInTableView();
         stage.close();

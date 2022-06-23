@@ -2,7 +2,6 @@ package datastorage;
 
 import model.Treatment;
 import utils.DateConverter;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +17,13 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         super(conn);
     }
 
+
     @Override
     protected String getCreateStatementString(Treatment treatment) throws SQLException {
         return String.format("INSERT INTO treatment (pid, treatment_date, begin, end, description, remarks, lock_status, caregiver) VALUES " +
-                        "(%d, '%s', '%s', '%s', '%s', '%s', '%s', '%s')", treatment.getPid(), treatment.getDate(),
+                        "(%d, '%s', '%s', '%s', '%s', '%s', '%s')", treatment.getPid(), treatment.getDate(),
                 treatment.getBegin(), treatment.getEnd(), treatment.getDescription(),
-                treatment.getRemarks(), treatment.getLockStatus(), treatment.getCaregiver().getSurname());
+                treatment.getRemarks(), treatment.getLockStatus(), treatment.getCaregiver());
     }
 
     @Override
@@ -31,6 +31,11 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         return String.format("SELECT * FROM treatment WHERE tid = %d AND lock_status = false", key);
     }
 
+    /**
+     * maps a <code>ResultSet</code> to a <code>Treatment</code>
+     * @param result ResultSet with a single row. Columns will be mapped to a user-object.
+     * @return treatment with the data from the resultSet.
+     */
     @Override
     protected Treatment getInstanceFromResultSet(ResultSet result) throws SQLException {
         LocalDate date = DateConverter.convertStringToLocalDate(result.getString(3));
@@ -46,6 +51,11 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         return "SELECT * FROM treatment WHERE lock_status = false";
     }
 
+    /**
+     * maps a <code>ResultSet</code> to a <code>Treatment-List</code>
+     * @param result ResultSet with a multiple rows. Data will be mapped to treatment-object.
+     * @return ArrayList with user from the resultSet.
+     */
     @Override
     protected ArrayList<Treatment> getListFromResultSet(ResultSet result) throws SQLException {
         ArrayList<Treatment> list = new ArrayList<Treatment>();
@@ -61,6 +71,11 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         return list;
     }
 
+    /**
+     * generates a <code>UPDATE</code>-Statement for a given user
+     * @param treatment for which a specific update is to be created
+     * @return <code>String</code> with the generated SQL.
+     */
     @Override
     protected String getUpdateStatementString(Treatment treatment) throws SQLException {
         return String.format("UPDATE treatment SET pid = %d, treatment_date ='%s', begin = '%s', end = '%s'," +
@@ -69,11 +84,22 @@ public class TreatmentDAO extends DAOimp<Treatment> {
                 treatment.getTid());
     }
 
+    /**
+     * generates a <code>delete</code>-Statement for a given treatment key
+     * @param key for which a specific DELETE is to be created
+     * @return <code>String</code> with the generated SQL.
+     */
     @Override
     protected String getDeleteStatementString(long key) {
         return String.format("Delete FROM treatment WHERE tid= %d", key);
     }
 
+
+    /**
+     * generates a <code>Treatment-List</code> from a given pid
+     * @param pid from which a list of treatments will be created
+     * @return ArrayList with treatments by patient from the resultSet.
+     */
     public List<Treatment> readTreatmentsByPid(long pid) throws SQLException {
         ArrayList<Treatment> list = new ArrayList<Treatment>();
         Treatment object = null;
@@ -83,10 +109,20 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         return list;
     }
 
+    /**
+     * generates a <code>SELECT</code>-Statement for a list of treatments by patient
+     * @param pid for which a specific SELECT is to be created
+     * @return <code>String</code> with the generated SQL.
+     */
     private String getReadAllTreatmentsOfOnePatientByPid(long pid) {
         return String.format("SELECT * FROM treatment WHERE pid = %d AND lock_status = false", pid);
     }
 
+    /**
+     * generates a <code>delete</code>-Statement for a given patient key
+     * @param key for which a specific DELETE is to be created
+     * @return <code>String</code> with the generated SQL.
+     */
     public void deleteByPid(long key) throws SQLException {
         Statement st = conn.createStatement();
         st.executeUpdate(String.format("Delete FROM treatment WHERE pid= %d", key));
