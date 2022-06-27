@@ -96,8 +96,8 @@ public class TreatmentDAO extends DAOimp<Treatment> {
     @Override
     protected String getUpdateStatementString(Treatment treatment) throws SQLException {
         return String.format("UPDATE treatment SET pid = %d, treatment_date ='%s', begin = '%s', end = '%s'," +
-                        "description = '%s', remarks = '%s' WHERE tid = %d", treatment.getPid(), treatment.getDate(),
-                treatment.getBegin(), treatment.getEnd(), treatment.getDescription(), treatment.getRemarks(), treatment.getCaregiver().getSurname(),
+                        "description = '%s', remarks = '%s', cid = '%d' WHERE tid = %d", treatment.getPid(), treatment.getDate(),
+                treatment.getBegin(), treatment.getEnd(), treatment.getDescription(), treatment.getRemarks(), treatment.getCaregiver().getCid(),
                 treatment.getTid());
     }
 
