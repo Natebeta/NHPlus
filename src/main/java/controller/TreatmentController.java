@@ -1,16 +1,22 @@
 package controller;
 
+import datastorage.CaregiverDAO;
 import datastorage.DAOFactory;
 import datastorage.PatientDAO;
 import datastorage.TreatmentDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Caregiver;
 import model.Patient;
 import model.Treatment;
 import utils.DateConverter;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TreatmentController {
     @FXML
@@ -28,14 +34,17 @@ public class TreatmentController {
     @FXML
     private DatePicker datepicker;
     @FXML
-    private Button btnChange;
-    @FXML
-    private Button btnCancel;
+    private ComboBox<String> comboBoxCaregiver;
 
     private AllTreatmentController controller;
     private Stage stage;
     private Patient patient;
     private Treatment treatment;
+    private ArrayList<Caregiver
+            > caregiverList = new ArrayList();
+
+    private final ObservableList<String> myComboBoxCaregiverData =
+            FXCollections.observableArrayList();
 
     public void initializeController(AllTreatmentController controller, Stage stage, Treatment treatment) {
         this.stage = stage;
@@ -44,13 +53,15 @@ public class TreatmentController {
         try {
             this.patient = pDao.read((int) treatment.getPid());
             this.treatment = treatment;
+            comboBoxCaregiver.setItems(myComboBoxCaregiverData);
             showData();
+            createComboBoxCaregiverData();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void showData(){
+    private void showData() throws SQLException {
         this.lblPatientName.setText(patient.getSurname()+", "+patient.getFirstName());
         this.lblCarelevel.setText(patient.getCareLevel());
         LocalDate date = DateConverter.convertStringToLocalDate(treatment.getDate());
@@ -59,6 +70,7 @@ public class TreatmentController {
         this.txtEnd.setText(this.treatment.getEnd());
         this.txtDescription.setText(this.treatment.getDescription());
         this.taRemarks.setText(this.treatment.getRemarks());
+        this.comboBoxCaregiver.getSelectionModel().select(this.treatment.getCaregiver().getSurname());
     }
 
     /**
@@ -72,6 +84,7 @@ public class TreatmentController {
         this.treatment.setEnd(txtEnd.getText());
         this.treatment.setDescription(txtDescription.getText());
         this.treatment.setRemarks(taRemarks.getText());
+        this.treatment.setCaregiver(caregiverList.get(this.comboBoxCaregiver.getSelectionModel().getSelectedIndex()));
         doUpdate();
         controller.readAllAndShowInTableView();
         stage.close();
@@ -94,4 +107,17 @@ public class TreatmentController {
     public void handleCancel(){
         stage.close();
     }
+
+    private void createComboBoxCaregiverData(){
+        CaregiverDAO dao = DAOFactory.getDAOFactory().createCaregiverDAO();
+        try {
+            ArrayList<Caregiver> caregiverList = (ArrayList<Caregiver>) dao.readAll();
+            for (Caregiver caregiver: caregiverList) {
+                this.myComboBoxCaregiverData.add(caregiver.getSurname());
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
+
