@@ -53,7 +53,7 @@ public abstract class DAOimp<T> implements DAO<T>{
         st.executeUpdate(getDeleteStatementString(key));
     }
 
-    protected abstract String getCreateStatementString(T t);
+    protected abstract String getCreateStatementString(T t) throws SQLException;
 
     protected abstract String getReadByIDStatementString(long key);
 
@@ -63,7 +63,7 @@ public abstract class DAOimp<T> implements DAO<T>{
 
     protected abstract ArrayList<T> getListFromResultSet(ResultSet set) throws SQLException;
 
-    protected abstract String getUpdateStatementString(T t);
+    protected abstract String getUpdateStatementString(T t) throws SQLException;
 
     protected abstract String getDeleteStatementString(long key);
 }

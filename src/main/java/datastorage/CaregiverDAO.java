@@ -1,7 +1,6 @@
 package datastorage;
 
 import model.Caregiver;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +9,10 @@ import java.util.ArrayList;
 
 public class CaregiverDAO extends DAOimp<Caregiver>{
 
+    /**
+     * constructs Onbject. Calls the Constructor from <code>DAOImp</code> to store the connection.
+     * @param conn
+     */
     public CaregiverDAO(Connection conn) {
         super(conn);
     }
@@ -22,7 +25,7 @@ public class CaregiverDAO extends DAOimp<Caregiver>{
 
     @Override
     protected String getReadByIDStatementString(long key) {
-        return String.format("SELECT * FROM caregiver WHERE cid = %d WHERE lock_status = false", key);
+        return String.format("SELECT * FROM caregiver WHERE cid = %d AND lock_status = false", key);
     }
 
     @Override
