@@ -15,7 +15,7 @@ public class DeleteTreatmentJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         try {
-            LocalDate date = LocalDate.now().minusYears(1);
+            LocalDate date = LocalDate.now().minusYears(10);
             TreatmentDAO dao = DAOFactory.getDAOFactory().createTreatmentDAO();
             int deleted = dao.deleteOlderThanDate(date);
 
