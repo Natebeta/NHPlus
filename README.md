@@ -50,3 +50,41 @@ Wird das Open JDK verwendet, werden JavaFX-Abhängigkeiten nicht importiert. Die
 - Benutzername: SA
 - Passwort: SA
 - Bitte nicht in die Datenbank schauen, während die Applikation läuft. Das sorgt leider für einen Lock, der erst wieder verschwindet, wenn IntelliJ neugestartet wird!
+
+## Allgemeine Informationen
+- Admin User:
+	- Benutzername: A
+	- Passwort: 123
+- Normal User:
+	- Benutzername: B
+	- Passwort: 123
+
+
+| Anforderungen der Datenwaschung | ✔️ |
+|--------------------------------------------------------------------------|---|
+| Nach Ablauf der Verwahrungsfrist automatische Löschung der Behandlungen.* | ✔️ |
+| Sperroption für Pfleger, die Daten werden in der View nicht angezeigt.   | ✔️ |
+| Pfleger können keine Daten endgültig löschen.                            | ✔️ |
+*Information zur Datenwaschung:
+Jeden Tag um 11:47 werden alle Behandlungen gelöscht, die älter als 10 Jahre sind.
+Wenn man in Line 10*** die Zahlen anpasst wird der Zeitpunkt der Löschung verändert. Erste Zahl die Stunde und zweite Zahl die Minuten. Hierbei gehen wir von der Zeit des PCs aus.
+ **[src](https://github.com/Natebeta/NHPlus/tree/develop/src)/[main](https://github.com/Natebeta/NHPlus/tree/develop/src/main)/[java](https://github.com/Natebeta/NHPlus/tree/develop/src/main/java)/[jobrunner](https://github.com/Natebeta/NHPlus/tree/develop/src/main/java/jobrunner)/**QuartzController.java**  /  startTreatmentDeleter
+
+Userstory: 
+https://1drv.ms/w/s!AvaVb7JDv20c3xTZH6a3siwFCuZM?e=Bqfqjs
+
+| Anforderungen des Pflegemoduls| ✔️ |
+|--------------------------------------------------------------------------------------------------------------------|---|
+| Die persönlichen Daten einer Pflegekraft besteht aus der PflegekraftID, dem Nachnamen, Vornamen und Telefonnummer.                                                                             | ✔️ |
+|   Alle Feldbelegungen sind verpflichtend.                                                                                                                 | ✔️ |
+|   Alle Pflegekräfte werden mit ihren vollständigen Daten in einer tabellarischen Übersicht dargestellt.                                                                                                                 | ✔️  |
+|    Jede Information, außer die ID, zu einer Pflegekraft kann aus der Übersicht heraus geändert werden.                                                                                                                | ✔️  |
+|   Es können neue Pflegekräfte hinzugefügt werden.                                                                                                                 |  ✔️ |
+|         Eine ausgewählte Pflegekraft kann gesperrt werden.                                                                                                           | ✔️  |
+|    Jede getätigte Änderung - Anlegen einer Pflegekraft, Ändern der Stammdaten, und das Löschen - wird in der Datenbank abgebildet.                                                                                                                | ✔️  |
+|    Beim Anlegen einer neuen Behandlung soll die entsprechende Pflegekraft mit Hilfe einer Combobox ausgewählt werden können.                                                                                                                |  ✔️ |
+|  Die Anzeige einer einzelnen Behandlung soll um die Daten des Pflegers/in ergänzt werden, der/die die Behandlung durchgeführt hat.                                                                                                                  | ✔️  |
+|  Gibt es bei einer gesperrten Pflegekraft nur noch Behandlungen, die mehr als 10 Jahre zurückliegen, wird der Eintrag des Pflegers gelöscht.                                                                                                                 | ✔️  |
+Userstory: 
+https://1drv.ms/w/s!AvaVb7JDv20c3xNJwfCe_F8eSnQe?e=LeDLpS
+
