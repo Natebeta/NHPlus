@@ -27,6 +27,12 @@ public class LoginController {
     @FXML
     private Label failedLogin;
 
+    /**
+     * Checks all user in {@link UserDAO} and checks username and password input and gives access to the appropriate view.
+     * The entered password will be hashed and matched with the hashed password in the database
+     * @throws SQLException provides information about database access or other errors
+     * @throws IOException signals a I/O error
+     */
     public void login() throws SQLException, IOException {
         Main main = new Main();
         UserDAO userDAO = DAOFactory.getDAOFactory().createUserDAO();
@@ -50,6 +56,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Encrypts the given password string by the method of {@link PasswordUtils} and convert it back to string
+     * @param password as a string
+     */
     private String passwordEncryption(String password) {
         SecretKey secretKey = PasswordUtils.getKeyPassword(password);
         assert secretKey != null;

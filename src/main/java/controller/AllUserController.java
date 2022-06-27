@@ -75,9 +75,9 @@ public class AllUserController {
 
         this.colID.setCellValueFactory(new PropertyValueFactory<User, Integer>("uid"));
 
-        //CellValuefactory zum Anzeigen der Daten in der TableView
+        //CellValuefactory to display data in TableView
         this.colFirstName.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
-        //CellFactory zum Schreiben innerhalb der Tabelle
+        //CellFactory writes in table cell
         this.colFirstName.setCellFactory(TextFieldTableCell.forTableColumn());
 
         this.colSurname.setCellValueFactory(new PropertyValueFactory<User, String>("surname"));
@@ -94,7 +94,7 @@ public class AllUserController {
         this.colLocked.setCellValueFactory(new PropertyValueFactory<User, Boolean>("locked"));
         this.colLocked.setCellFactory(ComboBoxTableCell.forTableColumn(comboBoxUserLocked));
 
-        //Anzeigen der Daten
+        //Display data
         this.tableView.setItems(this.tableviewContent);
 
         comboBoxUserRole.setItems(comboBoxUserData);
@@ -152,8 +152,8 @@ public class AllUserController {
     }
 
     /**
-     * handles new authorization value
-     * @param event event including the value that a user entered into the cell
+     * handles new locked status
+     * @param event event including the value that is set
      */
     @FXML
     public void handleOnEditLocked(TableColumn.CellEditEvent<User, Boolean> event) {
@@ -166,8 +166,8 @@ public class AllUserController {
     }
 
     /**
-     * updates a patient by calling the update-Method in the {@link PatientDAO}
-     * @param t row to be updated by the user (includes the patient)
+     * updates a user by calling the update-Method in the {@link UserDAO}
+     * @param t row to be updated by the user
      */
     private void doUpdate(TableColumn.CellEditEvent<User, String> t) {
         try {
@@ -178,7 +178,7 @@ public class AllUserController {
     }
 
     /**
-     * calls readAll in {@link UserDAO} and shows patients in the table
+     * calls readAll in {@link UserDAO} and shows users in the table
      */
     private void readAllAndShowInTableView() {
         this.tableviewContent.clear();
@@ -207,7 +207,7 @@ public class AllUserController {
     }
 
     /**
-     * handles a add-click-event. Creates a patient and calls the create method in the {@link UserDAO}
+     * handles a add-click-event. Creates a user and calls the create method in the {@link UserDAO}
      */
     @FXML
     public void handleAdd() {
@@ -234,6 +234,10 @@ public class AllUserController {
         }
     }
 
+    /**
+     * Encrypts the given password string by the method of {@link PasswordUtils} and convert it back to string
+     * @param password as a string
+     */
     private String passwordEncryption(String password) {
         SecretKey secretKey = PasswordUtils.getKeyPassword(password);
         assert null != secretKey;

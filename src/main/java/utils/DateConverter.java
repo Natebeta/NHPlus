@@ -2,7 +2,9 @@ package utils;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+/**
+ * Converts date and localtime
+ */
 public class DateConverter {
     public static LocalDate convertStringToLocalDate(String date) {
         String[] array = date.split("-");

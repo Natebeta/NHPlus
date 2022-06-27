@@ -192,10 +192,17 @@ public class Treatment {
                 "\nRemarks: " + this.remarks + "\n";
     }
 
+    /**
+     * @return lockstatus
+     */
     public Boolean getLockStatus() {
         return lockStatus;
     }
 
+    /**
+     * @param lockStatus
+     * Sets new lock status
+     */
     public void setLockStatus(boolean lockStatus) {
         this.lockStatus = lockStatus;
     }

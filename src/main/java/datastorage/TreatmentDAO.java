@@ -14,7 +14,7 @@ import java.util.List;
 public class TreatmentDAO extends DAOimp<Treatment> {
 
     /**
-     * constructs Onbject. Calls the Constructor from <code>DAOImp</code> to store the connection.
+     * constructs Object. Calls the Constructor from <code>DAOImp</code> to store the connection.
      * @param conn
      */
     public TreatmentDAO(Connection conn) {

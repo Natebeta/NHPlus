@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import jobrunner.QuartzController;
+import utils.PasswordUtils;
 
 import java.io.IOException;
 
@@ -18,6 +19,10 @@ public class Main extends Application {
     private Stage primaryStage;
     private static Stage stage;
 
+    /**
+     * Sets the primary stage / main window and starts the quartz job
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -25,6 +30,9 @@ public class Main extends Application {
         QuartzController.startTreatmentDeleter();
     }
 
+    /**
+     * Loads the main window and handles the connection to the database
+     */
     public void mainWindow() {
         try {
             stage = primaryStage;
@@ -51,6 +59,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Switches the current stage to a new scene by fxml view
+     * @param fxml the view
+     */
     public void changeView(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
         BorderPane borderPane = fxmlLoader.load();

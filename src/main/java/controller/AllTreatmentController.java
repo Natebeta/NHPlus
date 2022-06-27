@@ -74,7 +74,7 @@ public class AllTreatmentController {
     }
 
     /**
-     * calls readAll in {@link TreatmentDAO} and shows treatments in the table
+     * Calls readAll in {@link TreatmentDAO} and shows treatments in the table
      */
     public void readAllAndShowInTableView() {
         this.tableviewContent.clear();
@@ -91,8 +91,8 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles a combobox-click-event. Drop down for all patients. Select specific patient for only his treatments
-     * and Alle for all existing non locked treatsments
+     * Handles a combobox-click-event. Drop down for all patients. Select specific patient for only his treatments
+     * and Alle for all existing non-locked treatments
      */
     private void createComboBoxData(){
         PatientDAO dao = DAOFactory.getDAOFactory().createPatientDAO();
@@ -108,7 +108,7 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles the combobox drop down which includes all patients
+     * Handles the combobox dropdown which includes all patients
      */
     @FXML
     public void handleComboBox(){
@@ -137,6 +137,7 @@ public class AllTreatmentController {
 
     /**
      * Searches in Patient list for the surnames
+     * @param surname
      */
     private Patient searchInList(String surname){
         for (Patient patient : this.patientList) {
@@ -148,7 +149,8 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles a lock-click-event. Locks a caregiver and calls the update lock status method in the {@link TreatmentDAO}
+     * Handles a lock-click-event.
+     * Locks a caregiver and calls the update lock status method in the {@link TreatmentDAO}
      */
     @FXML
     public void handleLock(){
@@ -163,7 +165,7 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles a add-click-event. Creates a treatment and calls the create method in the {@link TreatmentDAO}
+     * Handles a add-click-event. Creates a treatment and calls the create method in the {@link TreatmentDAO}
      */
     @FXML
     public void handleNewTreatment() {
@@ -182,7 +184,7 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles a combobox-click-event. Changes View to the patients treatment view
+     * Handles a combobox-click-event. Changes View to the patients treatment view
      */
     @FXML
     public void handleMouseClick(){
@@ -197,7 +199,8 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles a combobox-click-event. Opens a new Window for a new treatment
+     * Handles a combobox-click-event. Opens a new Window for a new treatment
+     * @param patient
      */
     public void newTreatmentWindow(Patient patient){
         try {
@@ -218,7 +221,8 @@ public class AllTreatmentController {
     }
 
     /**
-     * handles a button-click-event. Opens the treatment view
+     * Handles a button-click-event. Opens the treatment view
+     * @param treatment
      */
     public void treatmentWindow(Treatment treatment){
         try {

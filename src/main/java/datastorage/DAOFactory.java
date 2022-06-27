@@ -1,7 +1,7 @@
 package datastorage;
-
-import model.Caregiver;
-
+/**
+ * DAO Factory for creating DAOs
+ */
 public class DAOFactory {
 
     private static DAOFactory instance;
