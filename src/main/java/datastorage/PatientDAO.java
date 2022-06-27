@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PatientDAO extends DAOimp<Patient> {
 
     /**
-     * constructs Onbject. Calls the Constructor from <code>DAOImp</code> to store the connection.
+     * constructs Object. Calls the Constructor from <code>DAOImp</code> to store the connection.
      * @param conn
      */
     public PatientDAO(Connection conn) {
@@ -28,13 +28,13 @@ public class PatientDAO extends DAOimp<Patient> {
      */
     @Override
     protected String getCreateStatementString(Patient patient) {
-        return String.format("INSERT INTO patient (firstname, surname, dateOfBirth, carelevel, roomnumber, assets) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
-                patient.getFirstName(), patient.getSurname(), patient.getDateOfBirth(), patient.getCareLevel(), patient.getRoomnumber(), patient.getAssets());
+        return String.format("INSERT INTO patient (firstname, surname, dateOfBirth, carelevel, roomnumber) VALUES ('%s', '%s', '%s', '%s', '%s')",
+                patient.getFirstName(), patient.getSurname(), patient.getDateOfBirth(), patient.getCareLevel(), patient.getRoomnumber());
     }
 
     /**
      * generates a <code>select</code>-Statement for a given key
-     * @param key for which a specific SELECTis to be created
+     * @param key for which a specific SELECT is to be created
      * @return <code>String</code> with the generated SQL.
      */
     @Override
@@ -53,7 +53,7 @@ public class PatientDAO extends DAOimp<Patient> {
         LocalDate date = DateConverter.convertStringToLocalDate(result.getString(4));
         p = new Patient(result.getInt(1), result.getString(2),
                 result.getString(3), date, result.getString(5),
-                result.getString(6), result.getString(7));
+                result.getString(6));
         return p;
     }
 
@@ -79,7 +79,7 @@ public class PatientDAO extends DAOimp<Patient> {
             LocalDate date = DateConverter.convertStringToLocalDate(result.getString(4));
             p = new Patient(result.getInt(1), result.getString(2),
                     result.getString(3), date,
-                    result.getString(5), result.getString(6), result.getString(7));
+                    result.getString(5), result.getString(6));
             list.add(p);
         }
         return list;
@@ -93,8 +93,8 @@ public class PatientDAO extends DAOimp<Patient> {
     @Override
     protected String getUpdateStatementString(Patient patient) {
         return String.format("UPDATE patient SET firstname = '%s', surname = '%s', dateOfBirth = '%s', carelevel = '%s', " +
-                "roomnumber = '%s', assets = '%s' WHERE pid = %d", patient.getFirstName(), patient.getSurname(), patient.getDateOfBirth(),
-                patient.getCareLevel(), patient.getRoomnumber(), patient.getAssets(), patient.getPid());
+                "roomnumber = '%s' WHERE pid = %d", patient.getFirstName(), patient.getSurname(), patient.getDateOfBirth(),
+                patient.getCareLevel(), patient.getRoomnumber(), patient.getPid());
     }
 
     /**

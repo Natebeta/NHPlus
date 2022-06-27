@@ -1,5 +1,7 @@
 package datastorage;
-
+/**
+ * DAO Factory for creating DAOs
+ */
 public class DAOFactory {
 
     private static DAOFactory instance;
@@ -21,5 +23,13 @@ public class DAOFactory {
 
     public PatientDAO createPatientDAO() {
         return new PatientDAO(ConnectionBuilder.getConnection());
+    }
+
+    public UserDAO createUserDAO() {
+        return new UserDAO(ConnectionBuilder.getConnection());
+    }
+
+    public CaregiverDAO createCaregiverDAO() {
+        return new CaregiverDAO(ConnectionBuilder.getConnection());
     }
 }

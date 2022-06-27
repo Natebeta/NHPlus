@@ -1,19 +1,22 @@
 package controller;
 
+import datastorage.CaregiverDAO;
 import datastorage.DAOFactory;
 import datastorage.TreatmentDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Caregiver;
 import model.Patient;
 import model.Treatment;
 import utils.DateConverter;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class NewTreatmentController {
     @FXML
@@ -30,16 +33,31 @@ public class NewTreatmentController {
     private TextArea taRemarks;
     @FXML
     private DatePicker datepicker;
+    @FXML
+    private ComboBox<String> comboBoxCaregiver;
 
     private AllTreatmentController controller;
     private Patient patient;
     private Stage stage;
 
+    private final ObservableList<String> myComboBoxCaregiverData =
+            FXCollections.observableArrayList();
+    private final ObservableList<Long> myComboBoxCaregiverDataLong =
+            FXCollections.observableArrayList();
+
+    /**
+     * Initializes the corresponding fields. Is called as soon as the corresponding FXML file is to be displayed.
+     */
     public void initialize(AllTreatmentController controller, Stage stage, Patient patient) {
         this.controller= controller;
         this.patient = patient;
         this.stage = stage;
+
+        comboBoxCaregiver.setItems(myComboBoxCaregiverData);
+        comboBoxCaregiver.getSelectionModel().select(1);
+
         showPatientData();
+        createComboBoxCaregiverData();
     }
 
     private void showPatientData(){
@@ -47,21 +65,28 @@ public class NewTreatmentController {
         this.lblSurname.setText(patient.getSurname());
     }
 
+    /**
+     * handles a add-click-event. Creates a treatment and calls the create method in the {@link TreatmentDAO}
+     */
     @FXML
     public void handleAdd(){
         LocalDate date = this.datepicker.getValue();
-        String s_begin = txtBegin.getText();
         LocalTime begin = DateConverter.convertStringToLocalTime(txtBegin.getText());
         LocalTime end = DateConverter.convertStringToLocalTime(txtEnd.getText());
         String description = txtDescription.getText();
         String remarks = taRemarks.getText();
+        long cid = myComboBoxCaregiverDataLong.get(this.comboBoxCaregiver.getSelectionModel().getSelectedIndex());
         Treatment treatment = new Treatment(patient.getPid(), date,
-                begin, end, description, remarks);
+                begin, end, description, remarks,false, cid);
         createTreatment(treatment);
         controller.readAllAndShowInTableView();
         stage.close();
     }
 
+    /**
+     * creates Treatment
+     * @param treatment calls the create method {@link TreatmentDAO}
+     */
     private void createTreatment(Treatment treatment) {
         TreatmentDAO dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         try {
@@ -71,8 +96,27 @@ public class NewTreatmentController {
         }
     }
 
+    /**
+     * handles a cancel-click-event. Closes the Combobox
+     */
     @FXML
     public void handleCancel(){
         stage.close();
+    }
+
+    /**
+     * handles a combobox-click-event. Drop down for caregivers and text fields for the informations
+     */
+    private void createComboBoxCaregiverData(){
+        CaregiverDAO dao = DAOFactory.getDAOFactory().createCaregiverDAO();
+        try {
+            ArrayList<Caregiver> caregiverList = (ArrayList<Caregiver>) dao.readAll();
+            for (Caregiver caregiver: caregiverList) {
+                this.myComboBoxCaregiverData.add(caregiver.getSurname());
+                this.myComboBoxCaregiverDataLong.add(caregiver.getCid());
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }
