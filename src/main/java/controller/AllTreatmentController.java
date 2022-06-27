@@ -90,6 +90,10 @@ public class AllTreatmentController {
         }
     }
 
+    /**
+     * handles a combobox-click-event. Drop down for all patients. Select specific patient for only his treatments
+     * and Alle for all existing non locked treatsments
+     */
     private void createComboBoxData(){
         PatientDAO dao = DAOFactory.getDAOFactory().createPatientDAO();
         try {
@@ -103,6 +107,9 @@ public class AllTreatmentController {
         }
     }
 
+    /**
+     * handles the combobox drop down which includes all patients
+     */
     @FXML
     public void handleComboBox(){
         String p = this.comboBoxPatient.getSelectionModel().getSelectedItem();
@@ -128,6 +135,9 @@ public class AllTreatmentController {
         }
     }
 
+    /**
+     * Searches in Patient list for the surnames
+     */
     private Patient searchInList(String surname){
         for (Patient patient : this.patientList) {
             if (patient.getSurname().equals(surname)) {
@@ -171,6 +181,9 @@ public class AllTreatmentController {
         }
     }
 
+    /**
+     * handles a combobox-click-event. Changes View to the patients treatment view
+     */
     @FXML
     public void handleMouseClick(){
         tableView.setOnMouseClicked(event -> {
@@ -183,12 +196,14 @@ public class AllTreatmentController {
         });
     }
 
+    /**
+     * handles a combobox-click-event. Opens a new Window for a new treatment
+     */
     public void newTreatmentWindow(Patient patient){
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/NewTreatmentView.fxml"));
             AnchorPane pane = loader.load();
             Scene scene = new Scene(pane);
-            //da die primaryStage noch im Hintergrund bleiben soll
             Stage stage = new Stage();
 
             NewTreatmentController controller = loader.getController();
@@ -198,11 +213,13 @@ public class AllTreatmentController {
             stage.setResizable(false);
             stage.showAndWait();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
+    /**
+     * handles a button-click-event. Opens the treatment view
+     */
     public void treatmentWindow(Treatment treatment){
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/TreatmentView.fxml"));

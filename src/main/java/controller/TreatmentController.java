@@ -16,8 +16,10 @@ import utils.DateConverter;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * The <code>TreatmentController</code> contains the entire logic of the treatments.
+ */
 public class TreatmentController {
     @FXML
     private Label lblPatientName;
@@ -46,6 +48,9 @@ public class TreatmentController {
     private final ObservableList<String> myComboBoxCaregiverData =
             FXCollections.observableArrayList();
 
+    /**
+     * Initializes the controller fields.
+     */
     public void initializeController(AllTreatmentController controller, Stage stage, Treatment treatment) {
         this.stage = stage;
         this.controller= controller;
@@ -61,6 +66,10 @@ public class TreatmentController {
         }
     }
 
+    /**
+     *
+     * shows a treatment by calling the ReadAll-Method in the {@link TreatmentDAO}
+     */
     private void showData() throws SQLException {
         this.lblPatientName.setText(patient.getSurname()+", "+patient.getFirstName());
         this.lblCarelevel.setText(patient.getCareLevel());
@@ -103,11 +112,17 @@ public class TreatmentController {
         }
     }
 
+    /**
+     * handles a cancel-click-event. Closes the Combobox
+     */
     @FXML
     public void handleCancel(){
         stage.close();
     }
 
+    /**
+     * handles a combobox-click-event. Opens a combobox filled with informations from the Treatment
+     */
     private void createComboBoxCaregiverData(){
         CaregiverDAO dao = DAOFactory.getDAOFactory().createCaregiverDAO();
         try {

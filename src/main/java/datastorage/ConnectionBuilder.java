@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+/**
+ * Establishes a connection to an HSQL database
+ */
 public class ConnectionBuilder {
     private static Connection conn;
 

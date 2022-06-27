@@ -45,7 +45,9 @@ public class NewTreatmentController {
     private final ObservableList<Long> myComboBoxCaregiverDataLong =
             FXCollections.observableArrayList();
 
-
+    /**
+     * Initializes the corresponding fields. Is called as soon as the corresponding FXML file is to be displayed.
+     */
     public void initialize(AllTreatmentController controller, Stage stage, Patient patient) {
         this.controller= controller;
         this.patient = patient;
@@ -102,6 +104,9 @@ public class NewTreatmentController {
         stage.close();
     }
 
+    /**
+     * handles a combobox-click-event. Drop down for caregivers and text fields for the informations
+     */
     private void createComboBoxCaregiverData(){
         CaregiverDAO dao = DAOFactory.getDAOFactory().createCaregiverDAO();
         try {

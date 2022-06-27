@@ -2,7 +2,6 @@ package datastorage;
 
 import model.Treatment;
 import utils.DateConverter;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -155,6 +154,11 @@ public class TreatmentDAO extends DAOimp<Treatment> {
         st.executeUpdate(String.format("UPDATE treatment SET lock_status = true WHERE tid = %d", key));
     }
 
+    /**
+     * generates a <code>DELETE</code>-Statement for a given treatment_date
+     * @param date for which a specific delete is to be created
+     * @return <code>String</code> with the generated SQL.
+     */
     public int deleteOlderThanDate(LocalDate date) throws SQLException {
         Statement st = conn.createStatement();
         return st.executeUpdate(String.format("Delete FROM treatment WHERE treatment_date<'%s'", Date.valueOf(date)));

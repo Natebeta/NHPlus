@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Method that deletes every treatment that is older then 10 years
+ */
 public class DeleteTreatmentJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {

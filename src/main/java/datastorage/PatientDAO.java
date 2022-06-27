@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PatientDAO extends DAOimp<Patient> {
 
     /**
-     * constructs Onbject. Calls the Constructor from <code>DAOImp</code> to store the connection.
+     * constructs Object. Calls the Constructor from <code>DAOImp</code> to store the connection.
      * @param conn
      */
     public PatientDAO(Connection conn) {
@@ -34,7 +34,7 @@ public class PatientDAO extends DAOimp<Patient> {
 
     /**
      * generates a <code>select</code>-Statement for a given key
-     * @param key for which a specific SELECTis to be created
+     * @param key for which a specific SELECT is to be created
      * @return <code>String</code> with the generated SQL.
      */
     @Override
