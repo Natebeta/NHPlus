@@ -168,6 +168,14 @@ public class Treatment {
         this.cid = caregiver.getCid();
     }
 
+    public long getCid() {
+        return cid;
+    }
+
+    public String getCidSurname() throws SQLException {
+        return DAOFactory.getDAOFactory().createCaregiverDAO().read(cid).getSurname();
+    }
+
     /**
      * @return string-representation of the treatment
      */

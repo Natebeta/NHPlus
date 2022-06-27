@@ -20,10 +20,10 @@ public class TreatmentDAO extends DAOimp<Treatment> {
 
     @Override
     protected String getCreateStatementString(Treatment treatment) throws SQLException {
-        return String.format("INSERT INTO treatment (pid, treatment_date, begin, end, description, remarks, lock_status, caregiver) VALUES " +
-                        "(%d, '%s', '%s', '%s', '%s', '%s', '%s')", treatment.getPid(), treatment.getDate(),
+        return String.format("INSERT INTO treatment (pid, treatment_date, begin, end, description, remarks, lock_status, cid) VALUES " +
+                        "(%d, '%s', '%s', '%s', '%s', '%s', '%s', '%d')", treatment.getPid(), treatment.getDate(),
                 treatment.getBegin(), treatment.getEnd(), treatment.getDescription(),
-                treatment.getRemarks(), treatment.getLockStatus(), treatment.getCaregiver());
+                treatment.getRemarks(), treatment.getLockStatus(), treatment.getCid());
     }
 
     @Override

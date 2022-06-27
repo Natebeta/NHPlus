@@ -62,7 +62,7 @@ public class AllTreatmentController {
         this.colBegin.setCellValueFactory(new PropertyValueFactory<>("begin"));
         this.colEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
         this.colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        this.colCaregiver.setCellValueFactory(new PropertyValueFactory<>("caregiver"));
+        this.colCaregiver.setCellValueFactory(new PropertyValueFactory<>("CidSurname"));
         this.tableView.setItems(this.tableviewContent);
         createComboBoxData();
     }
@@ -74,6 +74,7 @@ public class AllTreatmentController {
         List<Treatment> allTreatments;
         try {
             allTreatments = dao.readAll();
+            tableviewContent.clear();
             this.tableviewContent.addAll(allTreatments);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -42,6 +42,9 @@ public class NewTreatmentController {
 
     private final ObservableList<String> myComboBoxCaregiverData =
             FXCollections.observableArrayList();
+    private final ObservableList<Long> myComboBoxCaregiverDataLong =
+            FXCollections.observableArrayList();
+
 
     public void initialize(AllTreatmentController controller, Stage stage, Patient patient) {
         this.controller= controller;
@@ -67,9 +70,9 @@ public class NewTreatmentController {
         LocalTime end = DateConverter.convertStringToLocalTime(txtEnd.getText());
         String description = txtDescription.getText();
         String remarks = taRemarks.getText();
-        String caregiver = this.comboBoxCaregiver.getSelectionModel().getSelectedItem();
+        long cid = myComboBoxCaregiverDataLong.get(this.comboBoxCaregiver.getSelectionModel().getSelectedIndex());
         Treatment treatment = new Treatment(patient.getPid(), date,
-                begin, end, description, remarks, Long.parseLong(caregiver));
+                begin, end, description, remarks, cid);
         createTreatment(treatment);
         controller.readAllAndShowInTableView();
         stage.close();
@@ -95,6 +98,7 @@ public class NewTreatmentController {
             ArrayList<Caregiver> caregiverList = (ArrayList<Caregiver>) dao.readAll();
             for (Caregiver caregiver: caregiverList) {
                 this.myComboBoxCaregiverData.add(caregiver.getSurname());
+                this.myComboBoxCaregiverDataLong.add(caregiver.getCid());
             }
         }catch(SQLException e){
             e.printStackTrace();
