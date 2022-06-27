@@ -63,6 +63,9 @@ public class NewTreatmentController {
         this.lblSurname.setText(patient.getSurname());
     }
 
+    /**
+     * handles a add-click-event. Creates a treatment and calls the create method in the {@link TreatmentDAO}
+     */
     @FXML
     public void handleAdd(){
         LocalDate date = this.datepicker.getValue();
@@ -72,12 +75,16 @@ public class NewTreatmentController {
         String remarks = taRemarks.getText();
         long cid = myComboBoxCaregiverDataLong.get(this.comboBoxCaregiver.getSelectionModel().getSelectedIndex());
         Treatment treatment = new Treatment(patient.getPid(), date,
-                begin, end, description, remarks, cid);
+                begin, end, description, remarks,false, cid);
         createTreatment(treatment);
         controller.readAllAndShowInTableView();
         stage.close();
     }
 
+    /**
+     * creates Treatment
+     * @param treatment calls the create method {@link TreatmentDAO}
+     */
     private void createTreatment(Treatment treatment) {
         TreatmentDAO dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         try {
@@ -87,6 +94,9 @@ public class NewTreatmentController {
         }
     }
 
+    /**
+     * handles a cancel-click-event. Closes the Combobox
+     */
     @FXML
     public void handleCancel(){
         stage.close();

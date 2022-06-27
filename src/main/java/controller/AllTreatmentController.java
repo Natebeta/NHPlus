@@ -14,12 +14,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Patient;
 import model.Treatment;
-
+import datastorage.DAOFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The <code>AllTreatmentController</code> contains the entire logic of the all treatment view. It determines which data is displayed and how to react to events.
+ */
 public class AllTreatmentController {
     @FXML
     private TableView<Treatment> tableView;
@@ -50,6 +53,9 @@ public class AllTreatmentController {
             FXCollections.observableArrayList();
     private ArrayList<Patient> patientList;
 
+    /**
+     * Initializes the corresponding fields. Is called as soon as the corresponding FXML file is to be displayed.
+     */
     public void initialize() {
         readAllAndShowInTableView();
         comboBoxPatient.setItems(myComboBoxPatientData);
@@ -67,6 +73,9 @@ public class AllTreatmentController {
         createComboBoxData();
     }
 
+    /**
+     * calls readAll in {@link TreatmentDAO} and shows treatments in the table
+     */
     public void readAllAndShowInTableView() {
         this.tableviewContent.clear();
         comboBoxPatient.getSelectionModel().select(0);
@@ -128,6 +137,9 @@ public class AllTreatmentController {
         return null;
     }
 
+    /**
+     * handles a lock-click-event. Locks a caregiver and calls the update lock status method in the {@link TreatmentDAO}
+     */
     @FXML
     public void handleLock(){
         int index = this.tableView.getSelectionModel().getSelectedIndex();
@@ -140,6 +152,9 @@ public class AllTreatmentController {
         }
     }
 
+    /**
+     * handles a add-click-event. Creates a treatment and calls the create method in the {@link TreatmentDAO}
+     */
     @FXML
     public void handleNewTreatment() {
         try{

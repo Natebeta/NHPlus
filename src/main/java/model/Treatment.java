@@ -32,14 +32,14 @@ public class Treatment {
      * @param cid
      */
     public Treatment(long pid, LocalDate date, LocalTime begin,
-                     LocalTime end, String description, String remarks, long cid) {
+                     LocalTime end, String description, String remarks, boolean lockStatus, long cid) {
         this.pid = pid;
         this.date = date;
         this.begin = begin;
         this.end = end;
         this.description = description;
         this.remarks = remarks;
-        this.lockStatus = false;
+        this.lockStatus = lockStatus;
         this.cid = cid;
     }
 
@@ -55,7 +55,7 @@ public class Treatment {
      * @param cid
      */
     public Treatment(long tid, long pid, LocalDate date, LocalTime begin,
-                     LocalTime end, String description, String remarks, long cid) {
+                     LocalTime end, String description, String remarks, boolean lockStatus, long cid) {
         this.tid = tid;
         this.pid = pid;
         this.date = date;
@@ -63,7 +63,7 @@ public class Treatment {
         this.end = end;
         this.description = description;
         this.remarks = remarks;
-        this.lockStatus = false;
+        this.lockStatus = lockStatus;
         this.cid = cid;
     }
 

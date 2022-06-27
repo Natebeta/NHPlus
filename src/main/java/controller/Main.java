@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import jobrunner.QuartzController;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         mainWindow();
+        QuartzController.startTreatmentDeleter();
     }
 
     public void mainWindow() {
