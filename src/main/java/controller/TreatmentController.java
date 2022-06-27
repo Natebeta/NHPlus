@@ -114,6 +114,7 @@ public class TreatmentController {
             ArrayList<Caregiver> caregiverList = (ArrayList<Caregiver>) dao.readAll();
             for (Caregiver caregiver: caregiverList) {
                 this.myComboBoxCaregiverData.add(caregiver.getSurname());
+                this.caregiverList.add(caregiver);
             }
         }catch(SQLException e){
             e.printStackTrace();

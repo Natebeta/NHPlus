@@ -89,6 +89,6 @@
             <Button fx:id="btnCancel" layoutX="298.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleCancel" text="Abbruch" />
          </children>
       </HBox>
-      <TextArea fx:id="taRemarks" layoutX="50.0" layoutY="252.0" prefHeight="134.0" prefWidth="700.0" AnchorPane.topAnchor="265.0" />
+      <TextArea fx:id="taRemarks" layoutX="50.0" layoutY="252.0" prefHeight="118.0" prefWidth="700.0" AnchorPane.topAnchor="280.0" />
    </children>
 </AnchorPane>
