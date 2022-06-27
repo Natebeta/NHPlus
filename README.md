@@ -72,8 +72,6 @@ Jeden Tag um 11:47 werden alle Behandlungen gelöscht, die älter als 10 Jahre s
 Wenn man in Line 10*** die Zahlen anpasst wird der Zeitpunkt der Löschung verändert. Erste Zahl die Stunde und zweite Zahl die Minuten. Hierbei gehen wir von der Zeit des PCs aus.
  **[src](https://github.com/Natebeta/NHPlus/tree/develop/src)/[main](https://github.com/Natebeta/NHPlus/tree/develop/src/main)/[java](https://github.com/Natebeta/NHPlus/tree/develop/src/main/java)/[jobrunner](https://github.com/Natebeta/NHPlus/tree/develop/src/main/java/jobrunner)/**QuartzController.java**  /  startTreatmentDeleter
 
-Userstory: 
-https://1drv.ms/w/s!AvaVb7JDv20c3xTZH6a3siwFCuZM?e=Bqfqjs
 
 | Anforderungen des Pflegemoduls| ✔️ |
 |--------------------------------------------------------------------------------------------------------------------|---|
@@ -88,7 +86,15 @@ https://1drv.ms/w/s!AvaVb7JDv20c3xTZH6a3siwFCuZM?e=Bqfqjs
 |  Die Anzeige einer einzelnen Behandlung soll um die Daten des Pflegers/in ergänzt werden, der/die die Behandlung durchgeführt hat.                                                                                                                  | ✔️  |
 |  Gibt es bei einer gesperrten Pflegekraft nur noch Behandlungen, die mehr als 10 Jahre zurückliegen, wird der Eintrag des Pflegers gelöscht.                                                                                                                 | ✔️  |
 
+| Vermögensstand entfernen | ✔️ |
+|--------------------------------------------------------------------------|---|
+| Der Vgermögensstand ist nicht mehr in der Applikation einsehabr. | ✔️ |
+| Vermögensstand ist nicht mehr in der Datenbank bzw. Patienten-Tabelle vorhanden. | ✔️ |
 
-Userstory: 
-https://1drv.ms/w/s!AvaVb7JDv20c3xNJwfCe_F8eSnQe?e=LeDLpS
-
+| Login | ✔️ |
+|--------------------------------------------------------------------------|---|
+| Daten bestehen aus BenutzerID, Username, Kennwort, Nachname, Vorname, Berechtigung und Sperr-Status. | ✔️ |
+| Kennwort wird als verschlüsselter Hash in der Datenbank gespeichert.  | ✔️ |
+| Anwendung kann nur nach erfolgreicher Anmeldung zugegriffen werden.  | ✔️ |
+| Ein Admin kann neue Benutzer hinzufügen.  | ✔️ |
+| Benutzer können gesperrt werden, gesperrte Benutzer können sich nicht weiter anmelden.  | ✔️ |
