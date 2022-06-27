@@ -176,6 +176,9 @@ public class Treatment {
         return DAOFactory.getDAOFactory().createCaregiverDAO().read(cid).getSurname();
     }
 
+    public String getPidSurname() throws SQLException {
+        return DAOFactory.getDAOFactory().createPatientDAO().read(pid).getSurname();
+    }
     /**
      * @return string-representation of the treatment
      */

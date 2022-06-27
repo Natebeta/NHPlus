@@ -63,7 +63,7 @@ public class AllTreatmentController {
 
 
         this.colID.setCellValueFactory(new PropertyValueFactory<>("tid"));
-        this.colPid.setCellValueFactory(new PropertyValueFactory<>("pid"));
+        this.colPid.setCellValueFactory(new PropertyValueFactory<>("PidSurname"));
         this.colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         this.colBegin.setCellValueFactory(new PropertyValueFactory<>("begin"));
         this.colEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
